@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
 const Background = styled.div`
@@ -42,6 +43,7 @@ const Input = styled.input`
   border-style: hidden;
   /* box-shadow:  41px -41px 52px #1b9294,
              -41px 41px 52px #619d9d; */
+
 `;
 
 const RadioContainer = styled.div`
@@ -56,14 +58,17 @@ const RadioInputContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Radio = styled.input`
+const Radio = styled.input < { isActive: boolean } > `
   box-sizing: border-box;
+  cursor: pointer;
   appearance: none;
-  background: white;
+  background: #fff;
+  background: ${props => props.isActive ? "#06cfc1" : "#fff"};
   outline: 2px solid #333;
   border: 3px solid white;
   width: 0.8rem;
   height: 0.8rem;
+  transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
 `;
 
 const Button = styled.button`
@@ -88,6 +93,8 @@ const Label = styled.label`
 `;
 
 function App() {
+    const [isActive, setIsActive] = useState(false);
+
     return (
         <Background>
             <H1> Random Password Generator</H1>
@@ -95,18 +102,18 @@ function App() {
                 <Input type="text" placeholder="Your Password" />
                 <RadioContainer>
                     <RadioInputContainer>
-                    <Label for="length">Password Length :</Label>
-                    <input
-                        value="6"
-                        name="length"
-                        step="1"
-                        type="number"
-                        min="6"
-                        max="40"
-                    />
+                        <Label for="length">Password Length :</Label>
+                        <input
+                            value="6"
+                            name="length"
+                            step="1"
+                            type="number"
+                            min="6"
+                            max="40"
+                        />
                     </RadioInputContainer>
                     <RadioInputContainer>
-                        <Label>Upper Case</Label>
+                        <Label onChange={() => setIsActive(!isActive)}>Upper Case</Label>
                         <Radio type="radio" name="upperCase" />
                     </RadioInputContainer>
                     <RadioInputContainer>

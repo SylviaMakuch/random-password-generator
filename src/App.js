@@ -57,17 +57,13 @@ const CheckBoxInputContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CheckBox =
-    styled.input <
-    { checked: boolean } >
-    `
+const CheckBox =styled.input`
   box-sizing: border-box;
   cursor: pointer;
   outline: 2px solid #333;
   border: 3px solid white;
   width: 0.8rem;
   height: 0.8rem;
-  background: {props => props.checked ? "#06cfc1" : "#fff"};
 `;
 
 const Button = styled.button`
@@ -109,10 +105,10 @@ function App() {
                         <input
                             id="length"
                             name="length"
-                            step="1"
                             type="number"
                             min="6"
                             max="40"
+                            placeholder="6"
                         />
                     </CheckBoxInputContainer>
                     <CheckBoxInputContainer>
@@ -130,8 +126,8 @@ function App() {
                         <Label>Lower Case</Label>
                         <CheckBox
                             type="checkbox"
-                            checked={checked}
-                            onChange={handleChange}
+                            // checked={checked}
+                            // onChange={handleChange}
                             name="lowerCase"
                             id = "lowerCase"
                         />
@@ -140,8 +136,8 @@ function App() {
                         <Label>Numbers</Label>
                         <CheckBox
                             type="checkbox"
-                            checked={checked}
-                            onChange={handleChange}
+                            // checked={checked}
+                            // onChange={handleChange}
                             name="numbers"
                             id = "numbers"
                         />
@@ -150,8 +146,8 @@ function App() {
                         <Label>Numbers</Label>
                         <CheckBox
                             type="checkbox"
-                            checked={checked}
-                            onChange={handleChange}
+                            // checked={checked}
+                            // onChange={handleChange}
                             name="symbols"
                             id="symbols"
                         />

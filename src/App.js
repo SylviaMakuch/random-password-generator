@@ -13,7 +13,7 @@ const Background = styled.div`
 `;
 
 const H1 = styled.h1`
-  color: #fff;
+  color: black;
   font-size: 3rem;
   font-family: "Roboto Mono", monospace;
   font-weight: 700;
@@ -57,7 +57,7 @@ const CheckBoxInputContainer = styled.div`
   justify-content: space-between;
 `;
 
-const CheckBox =styled.input`
+const CheckBox = styled.input`
   box-sizing: border-box;
   cursor: pointer;
   outline: 2px solid #333;
@@ -72,12 +72,19 @@ const Button = styled.button`
   border-radius: 67px;
   font-family: "Roboto Mono", monospace;
   text-align: center;
-  boarder: none;
   border-radius: 15px;
   border-radius: 50px;
-  background: linear-gradient(225deg, #06cfc1, #05aea2);
+  background: linear-gradient(120deg, #06cfc1, #05aea2);
   box-shadow: -1px 1px 3px #024d48, 1px -1px 3px #0affff;
   border-style: hidden;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position .5s;
+  cursor: pointer;
+
+  &:hover {
+    background-position: 0 0;
+  }
 `;
 
 const Label = styled.label`
@@ -119,7 +126,7 @@ function App() {
                             onChange={handleChange}
                             name="upperCase"
                             value="upperCase"
-                            id = "upperCase"
+                            id="upperCase"
                         />
                     </CheckBoxInputContainer>
                     <CheckBoxInputContainer>
@@ -129,7 +136,7 @@ function App() {
                             // checked={checked}
                             // onChange={handleChange}
                             name="lowerCase"
-                            id = "lowerCase"
+                            id="lowerCase"
                         />
                     </CheckBoxInputContainer>
                     <CheckBoxInputContainer>
@@ -139,7 +146,7 @@ function App() {
                             // checked={checked}
                             // onChange={handleChange}
                             name="numbers"
-                            id = "numbers"
+                            id="numbers"
                         />
                     </CheckBoxInputContainer>
                     <CheckBoxInputContainer>
@@ -153,7 +160,9 @@ function App() {
                         />
                     </CheckBoxInputContainer>
                 </CheckBoxContainer>
-                <Button>Generate</Button>
+                <Button onClick={() => { }} onHover>
+                    Generate
+                </Button>
             </Card>
         </Background>
     );

@@ -43,32 +43,31 @@ const Input = styled.input`
   border-style: hidden;
   /* box-shadow:  41px -41px 52px #1b9294,
              -41px 41px 52px #619d9d; */
-
 `;
 
-const RadioContainer = styled.div`
+const CheckBoxContainer = styled.div`
   margin: 2rem;
   width: 16rem;
 `;
 
-const RadioInputContainer = styled.div`
+const CheckBoxInputContainer = styled.div`
   margin: 5% 0 4% 0;
   width: 16rem;
   display: flex;
   justify-content: space-between;
 `;
 
-const Radio = styled.input < { isActive: boolean } > `
+const CheckBox =
+    styled.input <
+    { checked: boolean } >
+    `
   box-sizing: border-box;
   cursor: pointer;
-  appearance: none;
-  background: #fff;
-  background: ${props => props.isActive ? "#06cfc1" : "#fff"};
   outline: 2px solid #333;
   border: 3px solid white;
   width: 0.8rem;
   height: 0.8rem;
-  transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+  background: {props => props.checked ? "#06cfc1" : "#fff"};
 `;
 
 const Button = styled.button`
@@ -93,42 +92,71 @@ const Label = styled.label`
 `;
 
 function App() {
-    const [isActive, setIsActive] = useState(false);
+    const [checked, setChecked] = useState(false);
+
+    const handleChange = () => {
+        setChecked(!checked);
+    };
 
     return (
         <Background>
             <H1> Random Password Generator</H1>
             <Card>
                 <Input type="text" placeholder="Your Password" />
-                <RadioContainer>
-                    <RadioInputContainer>
+                <CheckBoxContainer>
+                    <CheckBoxInputContainer>
                         <Label for="length">Password Length :</Label>
                         <input
-                            value="6"
+                            id="length"
                             name="length"
                             step="1"
                             type="number"
                             min="6"
                             max="40"
                         />
-                    </RadioInputContainer>
-                    <RadioInputContainer>
-                        <Label onChange={() => setIsActive(!isActive)}>Upper Case</Label>
-                        <Radio type="radio" name="upperCase" />
-                    </RadioInputContainer>
-                    <RadioInputContainer>
+                    </CheckBoxInputContainer>
+                    <CheckBoxInputContainer>
+                        <Label>Upper Case</Label>
+                        <CheckBox
+                            type="checkbox"
+                            checked={checked}
+                            onChange={handleChange}
+                            name="upperCase"
+                            value="upperCase"
+                            id = "upperCase"
+                        />
+                    </CheckBoxInputContainer>
+                    <CheckBoxInputContainer>
                         <Label>Lower Case</Label>
-                        <Radio type="radio" name="lowerCase" />
-                    </RadioInputContainer>
-                    <RadioInputContainer>
+                        <CheckBox
+                            type="checkbox"
+                            checked={checked}
+                            onChange={handleChange}
+                            name="lowerCase"
+                            id = "lowerCase"
+                        />
+                    </CheckBoxInputContainer>
+                    <CheckBoxInputContainer>
                         <Label>Numbers</Label>
-                        <Radio type="radio" name="numbers" />
-                    </RadioInputContainer>
-                    <RadioInputContainer>
+                        <CheckBox
+                            type="checkbox"
+                            checked={checked}
+                            onChange={handleChange}
+                            name="numbers"
+                            id = "numbers"
+                        />
+                    </CheckBoxInputContainer>
+                    <CheckBoxInputContainer>
                         <Label>Numbers</Label>
-                        <Radio type="radio" name="symbols" />
-                    </RadioInputContainer>
-                </RadioContainer>
+                        <CheckBox
+                            type="checkbox"
+                            checked={checked}
+                            onChange={handleChange}
+                            name="symbols"
+                            id="symbols"
+                        />
+                    </CheckBoxInputContainer>
+                </CheckBoxContainer>
                 <Button>Generate</Button>
             </Card>
         </Background>

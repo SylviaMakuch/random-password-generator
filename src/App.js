@@ -40,10 +40,12 @@ const Input = styled.input`
   boarder: none;
   border-radius: 15px;
   background: #06cfc185;
-  border-style: hidden;
-  /* box-shadow:  41px -41px 52px #1b9294,
-             -41px 41px 52px #619d9d; */
-`;
+  border-style: groove;
+  border-color: #f7feff36;
+  &:focus {
+    outline: none;
+    }
+  `;
 
 const CheckBoxContainer = styled.div`
   margin: 2rem;

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
+import { radioOptions } from "./config";
 
 const Background = styled.div`
   background: rgb(31, 166, 168);
@@ -109,7 +110,7 @@ function App() {
             <Card>
                 <Input type="text" placeholder="Your Password" />
                 <CheckBoxContainer>
-                    <CheckBoxInputContainer>
+                    
                         <Label for="length">Password Length :</Label>
                         <input
                             id="length"
@@ -119,50 +120,23 @@ function App() {
                             max="40"
                             placeholder="6"
                         />
-                    </CheckBoxInputContainer>
-                    <CheckBoxInputContainer>
-                        <Label>Upper Case</Label>
-                        <CheckBox
-                            type="checkbox"
-                            checked={checked}
-                            onChange={handleChange}
-                            name="upperCase"
-                            value="upperCase"
-                            id="upperCase"
-                        />
-                    </CheckBoxInputContainer>
-                    <CheckBoxInputContainer>
-                        <Label>Lower Case</Label>
-                        <CheckBox
-                            type="checkbox"
-                            // checked={checked}
-                            // onChange={handleChange}
-                            name="lowerCase"
-                            id="lowerCase"
-                        />
-                    </CheckBoxInputContainer>
-                    <CheckBoxInputContainer>
-                        <Label>Numbers</Label>
-                        <CheckBox
-                            type="checkbox"
-                            // checked={checked}
-                            // onChange={handleChange}
-                            name="numbers"
-                            id="numbers"
-                        />
-                    </CheckBoxInputContainer>
-                    <CheckBoxInputContainer>
-                        <Label>Numbers</Label>
-                        <CheckBox
-                            type="checkbox"
-                            // checked={checked}
-                            // onChange={handleChange}
-                            name="symbols"
-                            id="symbols"
-                        />
-                    </CheckBoxInputContainer>
+
+                    {radioOptions.map((option) => (
+                        <CheckBoxInputContainer>
+                          <Label for={option.id}>{option.label}</Label>
+                            <input
+                                type={option.type}
+                                id={option.id}
+                                name={option.value}
+                                value={option.value}
+                                checked={checked}
+                                onChange={handleChange}
+                            />
+                        </CheckBoxInputContainer>
+                    ))}
+        
                 </CheckBoxContainer>
-                <Button onClick={() => { }} onHover>
+                <Button onClick={() => { }} >
                     Generate
                 </Button>
             </Card>

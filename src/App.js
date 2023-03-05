@@ -110,7 +110,7 @@ function App() {
             <Card>
                 <Input type="text" placeholder="Your Password" />
                 <CheckBoxContainer>
-                    
+                      <CheckBoxInputContainer>
                         <Label for="length">Password Length :</Label>
                         <input
                             id="length"
@@ -120,7 +120,7 @@ function App() {
                             max="40"
                             placeholder="6"
                         />
-
+                      </CheckBoxInputContainer>
                     {radioOptions.map((option) => (
                         <CheckBoxInputContainer>
                           <Label for={option.id}>{option.label}</Label>

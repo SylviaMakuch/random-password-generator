@@ -54,10 +54,13 @@ const CheckBoxContainer = styled.div`
 `;
 
 const CheckBoxInputContainer = styled.div`
-  margin: 5% 0 4% 0;
-  width: 16rem;
-  display: flex;
-  justify-content: space-between;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". .";
+    justify-content: space-between;
+    margin: 10px 0;
 `;
 
 const CheckBox = styled.input`
@@ -99,10 +102,7 @@ const Label = styled.label`
 
 function App() {
     const [checked, setChecked] = useState(false);
-
-    const handleChange = () => {
-        setChecked(!checked);
-    };
+    
 
     return (
         <Background>
@@ -110,33 +110,21 @@ function App() {
             <Card>
                 <Input type="text" placeholder="Your Password" />
                 <CheckBoxContainer>
-                      <CheckBoxInputContainer>
-                        <Label for="length">Password Length :</Label>
-                        <input
-                            id="length"
-                            name="length"
-                            type="number"
-                            min="6"
-                            max="40"
-                            placeholder="6"
-                        />
-                      </CheckBoxInputContainer>
-                    {radioOptions.map((option) => (
-                        <CheckBoxInputContainer>
+                    {radioOptions.map((option, index) => (
+                        <CheckBoxInputContainer className="checkbox-input-container">
                           <Label for={option.id}>{option.label}</Label>
                             <input
                                 type={option.type}
                                 id={option.id}
                                 name={option.value}
                                 value={option.value}
-                                checked={checked}
-                                onChange={handleChange}
+                                onChange={() => { setChecked(!checked) }}
+                                key={index}
                             />
                         </CheckBoxInputContainer>
                     ))}
-        
                 </CheckBoxContainer>
-                <Button onClick={() => { }} >
+                <Button onClick={() => { console.log(input)}} >
                     Generate
                 </Button>
             </Card>

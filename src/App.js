@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { radioOptions } from "./config";
@@ -45,8 +45,8 @@ const Input = styled.input`
   border-color: #f7feff36;
   &:focus {
     outline: none;
-    }
-  `;
+  }
+`;
 
 const CheckBoxContainer = styled.div`
   margin: 2rem;
@@ -54,13 +54,13 @@ const CheckBoxContainer = styled.div`
 `;
 
 const CheckBoxInputContainer = styled.div`
-    display: grid;
-    grid-template-columns: 80% 20%;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-template-areas: ". .";
-    justify-content: space-between;
-    margin: 15px 0;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: ". .";
+  justify-content: space-between;
+  margin: 15px 0;
 `;
 
 const Button = styled.button`
@@ -76,7 +76,7 @@ const Button = styled.button`
   border-style: hidden;
   background-size: 200% 100%;
   background-position: 100% 0;
-  transition: background-position .5s;
+  transition: background-position 0.5s;
   cursor: pointer;
 
   &:hover {
@@ -92,9 +92,10 @@ const Label = styled.label`
 `;
 
 function App() {
-  const [checkbox, setCheckbox] = useState("");
+  const [checkbox, setCheckbox] = useState([]);
   const [length, setLength] = useState(6);
   const [password, setPassword] = useState("");
+
 
   return (
     <Background>
@@ -128,61 +129,69 @@ function App() {
                 max={option.max}
                 key={index}
                 onChange={(e) => {
-                  setCheckbox(option.value);
-                }}
+                  const optionSelected = e.target.value;
+                  setCheckbox(optionSelected);
+                  console.log(checkbox);
+                }
+                }
               />
             </CheckBoxInputContainer>
           ))}
         </CheckBoxContainer>
-        <Button onClick={() => { 
-          const output = [];
-          const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-          const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-          const numbers = "0123456789";
-          const symbols = "!@#$%^&*()_+";
-          let password = "";
-
-          if (checkbox === "uppercase") {
-            for (let i = 0; i < length; i++) {
-           console.log(upperCase.charAt( Math.floor(Math.random() * upperCase.length)));
-              password += upperCase.charAt(
-                Math.floor(Math.random() * upperCase.length)
-              );
+        <Button
+          onClick={() => {
+            const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+            const numbers = "0123456789";
+            const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            let password = "";
+    
+            if (checkbox === "uppercase") {
+              for (let i = 0; i < length; i++) {
+                password += upperCase.charAt(
+                  Math.floor(Math.random() * upperCase.length)
+                );
+              }
+            } else if (checkbox === "lowercase") {
+              for (let i = 0; i < length; i++) {
+                password += lowerCase.charAt(
+                  Math.floor(Math.random() * lowerCase.length)
+                );
+              }
+            } else if (checkbox === "numbers") {
+              for (let i = 0; i < length; i++) {
+                password += numbers.charAt(
+                  Math.floor(Math.random() * numbers.length)
+                );
+              }
+            } else if (checkbox === "symbols") {
+              for (let i = 0; i < length; i++) {
+                password += symbols.charAt(
+                  Math.floor(Math.random() * symbols.length)
+                );
+              }
+            } else if (checkbox === "all") {
+              for (let i = 0; i < length; i++) {
+                password += upperCase.charAt(
+                  Math.floor(Math.random() * upperCase.length)
+                );
+                password += lowerCase.charAt(
+                  Math.floor(Math.random() * lowerCase.length)
+                );
+                password += numbers.charAt(
+                  Math.floor(Math.random() * numbers.length)
+                );
+                password += symbols.charAt(
+                  Math.floor(Math.random() * symbols.length)
+                );
+              }
             }
-          } else if (checkbox === "lowercase") {
-            for (let i = 0; i < length; i++) {
-              password += lowerCase.charAt(
-                Math.floor(Math.random() * lowerCase.length)
-              );
-            }
-          }
-          else if (checkbox === "numbers") {
-            for (let i = 0; i < length; i++) {
-              password += numbers.charAt(
-                Math.floor(Math.random() * numbers.length)
-              );
-            }
-          }
-          else if (checkbox === "symbols") {
-            for (let i = 0; i < length; i++) {
-              password += symbols.charAt(
-                Math.floor(Math.random() * symbols.length)
-              );
-            }
-          }
-          else if (checkbox === "all") {
-            for (let i = 0; i < length; i++) {
-              output.push(upperCase, lowerCase, numbers, symbols);
-              const combined = output[Math.floor(Math.random() * output.length)];
-              password += combined.charAt(
-                Math.floor(Math.random() * combined.length)
-              );
-            }
-          }
-          setPassword(password);
-          console.log(password)
-         }} >
-          Generate
+            setPassword(password);
+          }}  
+          
+          
+        >
+          Generate Password
         </Button>
       </Card>
     </Background>

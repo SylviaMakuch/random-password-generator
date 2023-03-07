@@ -63,15 +63,6 @@ const CheckBoxInputContainer = styled.div`
     margin: 15px 0;
 `;
 
-const CheckBox = styled.input`
-  box-sizing: border-box;
-  cursor: pointer;
-  outline: 2px solid #333;
-  border: 3px solid white;
-  width: 0.8rem;
-  height: 0.8rem;
-`;
-
 const Button = styled.button`
   height: 2rem;
   width: 12rem;
@@ -122,7 +113,6 @@ function App() {
               value={length}
               onChange={(e) => {
                 setLength(e.target.value);
-                console.log(e.target.value)
               }}
             />
           </CheckBoxInputContainer>
@@ -154,6 +144,7 @@ function App() {
 
           if (checkbox === "uppercase") {
             for (let i = 0; i < length; i++) {
+           console.log(upperCase.charAt( Math.floor(Math.random() * upperCase.length)));
               password += upperCase.charAt(
                 Math.floor(Math.random() * upperCase.length)
               );

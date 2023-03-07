@@ -131,9 +131,8 @@ function App() {
                 onChange={(e) => {
                   const optionSelected = e.target.value;
                   setCheckbox(optionSelected);
-                  console.log(checkbox);
-                }
-                }
+                  console.log(optionSelected);
+                }}
               />
             </CheckBoxInputContainer>
           ))}
@@ -145,51 +144,7 @@ function App() {
             const numbers = "0123456789";
             const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
             let password = "";
-    
-            if (checkbox === "uppercase") {
-              for (let i = 0; i < length; i++) {
-                password += upperCase.charAt(
-                  Math.floor(Math.random() * upperCase.length)
-                );
-              }
-            } else if (checkbox === "lowercase") {
-              for (let i = 0; i < length; i++) {
-                password += lowerCase.charAt(
-                  Math.floor(Math.random() * lowerCase.length)
-                );
-              }
-            } else if (checkbox === "numbers") {
-              for (let i = 0; i < length; i++) {
-                password += numbers.charAt(
-                  Math.floor(Math.random() * numbers.length)
-                );
-              }
-            } else if (checkbox === "symbols") {
-              for (let i = 0; i < length; i++) {
-                password += symbols.charAt(
-                  Math.floor(Math.random() * symbols.length)
-                );
-              }
-            } else if (checkbox === "all") {
-              for (let i = 0; i < length; i++) {
-                password += upperCase.charAt(
-                  Math.floor(Math.random() * upperCase.length)
-                );
-                password += lowerCase.charAt(
-                  Math.floor(Math.random() * lowerCase.length)
-                );
-                password += numbers.charAt(
-                  Math.floor(Math.random() * numbers.length)
-                );
-                password += symbols.charAt(
-                  Math.floor(Math.random() * symbols.length)
-                );
-              }
-            }
-            setPassword(password);
-          }}  
-          
-          
+          }}
         >
           Generate Password
         </Button>

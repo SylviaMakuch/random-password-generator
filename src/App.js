@@ -111,7 +111,6 @@ function App() {
               name="length"
               min="6"
               max="25"
-              value={length}
               onChange={(e) => {
                 setLength(e.target.value);
               }}
@@ -126,26 +125,24 @@ function App() {
                 name={option.value}
                 value={option.value}
                 min={option.min}
-                max={option.max}
+                max={option.max}x
                 key={index}
-                onChange={(e) => {
-                  const optionSelected = e.target.value;
-                  setCheckbox(optionSelected);
-                  console.log(optionSelected);
+                onChange={() => {
+                  const newCheckbox = [...checkbox];//copy the array
+                  if (newCheckbox.includes(option.value)) { //if the array includes the value
+                    const index = newCheckbox.indexOf(option.value); //get the index of the value
+                    newCheckbox.splice(index, 1); //remove the value from the array
+                  }
+                  if (!newCheckbox.includes(option.value)) { //if the array does not include the value
+                    newCheckbox.push(option.value); //add the value to the array
+                  }
+                  setCheckbox(newCheckbox);
                 }}
               />
             </CheckBoxInputContainer>
           ))}
         </CheckBoxContainer>
-        <Button
-          onClick={() => {
-            const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-            const numbers = "0123456789";
-            const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-            let password = "";
-          }}
-        >
+        <Button>
           Generate Password
         </Button>
       </Card>

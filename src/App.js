@@ -125,7 +125,7 @@ function App() {
                 name={option.value}
                 value={option.value}
                 min={option.min}
-                max={option.max}x
+                max={option.max} x
                 key={index}
                 onChange={() => {
                   const newCheckbox = [...checkbox];//copy the array
@@ -142,7 +142,32 @@ function App() {
             </CheckBoxInputContainer>
           ))}
         </CheckBoxContainer>
-        <Button>
+        <Button onClick={() => {
+          const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+          const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+          const numbers = "0123456789";
+          const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+
+          let output = [];
+
+          for(let i =0; i< length; i++){
+            if(checkbox.includes("uppercase")){
+              output.push(upperCase[Math.floor(Math.random() * upperCase.length)]) //get a random character from the uppercase string
+            }
+            if(checkbox.includes("lowercase")){
+              output.push(lowerCase[Math.floor(Math.random() * lowerCase.length)])
+            }
+            if(checkbox.includes("numbers")){
+              output.push(numbers[Math.floor(Math.random() * numbers.length)])
+            }
+            if(checkbox.includes("symbols")){
+              output.push(symbols[Math.floor(Math.random() * symbols.length)])
+            }
+            setPassword(output);
+          }
+
+        }}
+        >
           Generate Password
         </Button>
       </Card>

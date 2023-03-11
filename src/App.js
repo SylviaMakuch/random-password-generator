@@ -96,7 +96,6 @@ function App() {
   const [length, setLength] = useState(6);
   const [password, setPassword] = useState("");
 
-
   return (
     <Background>
       <H1> Random Password Generator</H1>
@@ -149,27 +148,25 @@ function App() {
           const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
           let output = ""; //create an empty string
 
-          for(let i =0; i< length; i++){ //loop through the length of the password
-            if(checkbox.includes("upperCase")){ //if the checkbox includes uppercase
+          for (let i = 0; i < length; i++) { //loop through the length of the password
+            if (checkbox.includes("upperCase")) { //if the checkbox includes uppercase
               output += upperCase[Math.floor(Math.random() * upperCase.length)] //add a random uppercase letter to the output string
-              console.log(output);
-            }
-            if(checkbox.includes("lowerCase")){ 
-              output += lowerCase[Math.floor(Math.random() * lowerCase.length)] //
-      
-            }
-            if(checkbox.includes("numbers")){ 
-            let numbersOutput = numbers[Math.floor(Math.random() * numbers.length)]
-            output += numbersOutput
-             console.log(numbersOutput)
-            }
-            if(checkbox.includes("symbols")){ 
-             let symbolsOutput = symbols[Math.floor(Math.random() * symbols.length)] 
-             output += symbolsOutput
-            }
-            setPassword(output)
-          }
 
+            }
+            if (checkbox.includes("lowerCase")) {
+              output += lowerCase[Math.floor(Math.random() * lowerCase.length)] //
+
+            }
+            if (checkbox.includes("numbers")) {
+
+            }
+            if (checkbox.includes("symbols")) {
+              output += symbols[Math.floor(Math.random() * symbols.length)]
+
+            }
+            let pw = output.slice(0, length); //slice the output string to the length of the password
+            setPassword(pw); //set the password state to the output string
+          }
         }}
         >
           Generate Password

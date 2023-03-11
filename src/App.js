@@ -44,8 +44,8 @@ const Card = styled.div`
 
 const Input = styled.input`
   height: 50px;
-  width: 400px;
-  margin: 2rem;
+  /* width: 400px; */
+  /* margin: 1rem 0; */
   border-radius: 67px;
   font-family: "Roboto Mono", monospace;
   text-align: center;
@@ -55,10 +55,24 @@ const Input = styled.input`
   border-style: groove;
   border-color: #f7feff36;
   height: 3rem;
-  width: 78%;
+  width: 92%;
   &:focus {
     outline: none;
   }
+`;
+
+const CopyButton = styled.button`
+  background: #06cfc185;
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0rem;
+  text-align: center;
+  height: 42%;
+  border: 1px #ffffff2b solid;
+  width: 100%;
+  height: 97%;
 `;
 
 const CheckBoxContainer = styled.div`
@@ -68,11 +82,12 @@ const CheckBoxContainer = styled.div`
 
 const CheckBoxInputContainer = styled.div`
   display: grid;
-  grid-template-columns: 90% 10%;
+  grid-template-columns: 85% 15%;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: ". .";
   justify-content: space-between;
+  align-items: center;
   margin: 1rem 0;
 `;
 
@@ -119,7 +134,10 @@ function App() {
     <Background>
       <H1> Random Password Generator</H1>
       <Card>
-        <Input type="text" placeholder="Your Password" value={password} />
+        <CheckBoxInputContainer style={{ width : "90%"}}>
+        <Input type="text" placeholder="Your Password" value={password}/>
+        <CopyButton>Copy</CopyButton>
+        </CheckBoxInputContainer>
         <CheckBoxContainer>
           <CheckBoxInputContainer>
             <Label for="length">Password Length</Label>
@@ -138,13 +156,13 @@ function App() {
             <CheckBoxInputContainer className="checkbox-input-container">
               <Label for={option.id}>{option.label}</Label>
               <input
+              style={{height: "1.4rem"}}
                 type={option.type}
                 id={option.id}
                 name={option.value}
                 value={option.value}
                 min={option.min}
                 max={option.max}
-                x
                 key={index}
                 onChange={() => {
                   const newCheckbox = [...checkbox]; //copy the array

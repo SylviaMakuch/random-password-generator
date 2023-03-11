@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { radioOptions } from "./config";
@@ -78,7 +78,7 @@ const CheckBoxInputContainer = styled.div`
 
 const Button = styled.button`
   height: 3rem;
-  padding: 1rem 3.2rem;
+  padding: 0rem 3.2rem;
   margin: 2rem;
   border-radius: 67px;
   font-family: "Roboto Mono", monospace;
@@ -96,6 +96,7 @@ const Button = styled.button`
 
   &:hover {
     background-position: 0 0;
+    color: white;
   }
 `;
 
@@ -178,10 +179,10 @@ function App() {
                   upperCase[Math.floor(Math.random() * upperCase.length)]; //add a random uppercase letter to the output string
               }
               if (checkbox.includes("lowerCase")) {
-                output +=
-                  lowerCase[Math.floor(Math.random() * lowerCase.length)]; //
+                output +=lowerCase[Math.floor(Math.random() * lowerCase.length)]; //
               }
               if (checkbox.includes("numbers")) {
+                output += numbers[Math.floor(Math.random() * numbers.length)];
               }
               if (checkbox.includes("symbols")) {
                 output += symbols[Math.floor(Math.random() * symbols.length)];

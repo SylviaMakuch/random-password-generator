@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { radioOptions } from "./config";
+import navigator from "react";
 
 const Background = styled.div`
   background: rgb(22 188 191);
@@ -43,9 +44,6 @@ const Card = styled.div`
 `;
 
 const Input = styled.input`
-  height: 50px;
-  /* width: 400px; */
-  /* margin: 1rem 0; */
   border-radius: 67px;
   font-family: "Roboto Mono", monospace;
   text-align: center;
@@ -54,6 +52,7 @@ const Input = styled.input`
   background: #06cfc185;
   border-style: groove;
   border-color: #f7feff36;
+  margin: 2rem 0rem ;
   height: 3rem;
   width: 92%;
   &:focus {
@@ -72,7 +71,13 @@ const CopyButton = styled.button`
   height: 42%;
   border: 1px #ffffff2b solid;
   width: 100%;
-  height: 97%;
+  height: 3rem;
+  cursor: pointer;
+
+  @hover {
+    background: #06cfc1;
+    color: white; 
+  }
 `;
 
 const CheckBoxContainer = styled.div`
@@ -89,6 +94,7 @@ const CheckBoxInputContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
+  width: 90% ;
 `;
 
 const Button = styled.button`
@@ -129,16 +135,23 @@ function App() {
   const [checkbox, setCheckbox] = useState([]);
   const [length, setLength] = useState(6);
   const [password, setPassword] = useState("");
+  const [copied, setCopied] = useState("");
 
   return (
     <Background>
       <H1> Random Password Generator</H1>
-      <Card>
-        <CheckBoxInputContainer style={{ width : "90%"}}>
-        <Input type="text" placeholder="Your Password" value={password}/>
-        <CopyButton>Copy</CopyButton>
-        </CheckBoxInputContainer>
-        <CheckBoxContainer>
+      <Card className="card">
+        <CheckBoxContainer className="checkbox-container" style={{ width : "90%"}}>
+          <CheckBoxInputContainer className="checkbox-input-container">
+            <Input type="text" placeholder="Your Password" value={password} />
+            <CopyButton
+              onClick={() => {
+                navigator.clipboard.writeText(password);
+                setCopied(password);
+                alert("Password Copied");
+              }}
+            >Copy</CopyButton>
+          </CheckBoxInputContainer>
           <CheckBoxInputContainer>
             <Label for="length">Password Length</Label>
             <input
@@ -156,7 +169,7 @@ function App() {
             <CheckBoxInputContainer className="checkbox-input-container">
               <Label for={option.id}>{option.label}</Label>
               <input
-              style={{height: "1.4rem"}}
+                style={{ height: "1.4rem" }}
                 type={option.type}
                 id={option.id}
                 name={option.value}
@@ -197,7 +210,7 @@ function App() {
                   upperCase[Math.floor(Math.random() * upperCase.length)]; //add a random uppercase letter to the output string
               }
               if (checkbox.includes("lowerCase")) {
-                output +=lowerCase[Math.floor(Math.random() * lowerCase.length)]; //
+                output += lowerCase[Math.floor(Math.random() * lowerCase.length)]; //
               }
               if (checkbox.includes("numbers")) {
                 output += numbers[Math.floor(Math.random() * numbers.length)];

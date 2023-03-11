@@ -147,23 +147,27 @@ function App() {
           const lowerCase = "abcdefghijklmnopqrstuvwxyz";
           const numbers = "0123456789";
           const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
+          let output = ""; //create an empty string
 
-          let output = [];
-
-          for(let i =0; i< length; i++){
-            if(checkbox.includes("uppercase")){
-              output.push(upperCase[Math.floor(Math.random() * upperCase.length)]) //get a random character from the uppercase string
+          for(let i =0; i< length; i++){ //loop through the length of the password
+            if(checkbox.includes("upperCase")){ //if the checkbox includes uppercase
+              output += upperCase[Math.floor(Math.random() * upperCase.length)] //add a random uppercase letter to the output string
+              console.log(output);
             }
-            if(checkbox.includes("lowercase")){
-              output.push(lowerCase[Math.floor(Math.random() * lowerCase.length)])
+            if(checkbox.includes("lowerCase")){ 
+              output += lowerCase[Math.floor(Math.random() * lowerCase.length)] //
+      
             }
-            if(checkbox.includes("numbers")){
-              output.push(numbers[Math.floor(Math.random() * numbers.length)])
+            if(checkbox.includes("numbers")){ 
+            let numbersOutput = numbers[Math.floor(Math.random() * numbers.length)]
+            output += numbersOutput
+             console.log(numbersOutput)
             }
-            if(checkbox.includes("symbols")){
-              output.push(symbols[Math.floor(Math.random() * symbols.length)])
+            if(checkbox.includes("symbols")){ 
+             let symbolsOutput = symbols[Math.floor(Math.random() * symbols.length)] 
+             output += symbolsOutput
             }
-            setPassword(output);
+            setPassword(output)
           }
 
         }}

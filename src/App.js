@@ -55,6 +55,7 @@ const Input = styled.input`
   margin: 2rem 0rem ;
   height: 3rem;
   width: 92%;
+
   &:focus {
     outline: none;
   }
@@ -74,7 +75,7 @@ const CopyButton = styled.button`
   height: 3rem;
   cursor: pointer;
 
-  @hover {
+ &:hover {
     background: #06cfc1;
     color: white; 
   }
@@ -104,7 +105,7 @@ const Button = styled.button`
   border-radius: 67px;
   font-family: "Roboto Mono", monospace;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border-radius: 15px;
   border-radius: 50px;
   background: linear-gradient(120deg, #06cfc1, #05aea2);
@@ -135,21 +136,40 @@ function App() {
   const [checkbox, setCheckbox] = useState([]);
   const [length, setLength] = useState(6);
   const [password, setPassword] = useState("");
-  const [copied, setCopied] = useState("");
+
+  const copyToClipboard = (content) => {
+    if (window.isSecureContext && navigator.clipboard) { // Secure context check
+      navigator.clipboard.writeText(content);
+      alert('Copied to clipboard');
+    } else {
+      unsecuredCopyToClipboard(content);// Fallback for insecure context
+    }
+  };
+
+  function unsecuredCopyToClipboard(text) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;// Set the text content to be the text you wished to copy
+    document.body.appendChild(textArea);
+    textArea.focus();// Select the text content
+    textArea.select();// Use try & catch for unsupported browser
+    try {
+      document.execCommand('copy');
+      alert('Copied to clipboard');
+    } catch (err) {
+      console.error('Unable to copy to clipboard', err);
+      alert('Unable to copy to clipboard');
+    }
+    document.body.removeChild(textArea);
+  }
 
   return (
     <Background>
       <H1> Random Password Generator</H1>
       <Card className="card">
-        <CheckBoxContainer className="checkbox-container" style={{ width : "90%"}}>
+        <CheckBoxContainer className="checkbox-container" style={{ width: "90%" }}>
           <CheckBoxInputContainer className="checkbox-input-container">
             <Input type="text" placeholder="Your Password" value={password} />
-            <CopyButton
-              onClick={() => {
-                navigator.clipboard.writeText(password);
-                setCopied(password);
-                alert("Password Copied");
-              }}
+            <CopyButton onClick={() => copyToClipboard(password)}
             >Copy</CopyButton>
           </CheckBoxInputContainer>
           <CheckBoxInputContainer>
@@ -180,12 +200,10 @@ function App() {
                 onChange={() => {
                   const newCheckbox = [...checkbox]; //copy the array
                   if (newCheckbox.includes(option.value)) {
-                    //if the array includes the value
                     const index = newCheckbox.indexOf(option.value); //get the index of the value
                     newCheckbox.splice(index, 1); //remove the value from the array
                   }
                   if (!newCheckbox.includes(option.value)) {
-                    //if the array does not include the value
                     newCheckbox.push(option.value); //add the value to the array
                   }
                   setCheckbox(newCheckbox);
@@ -200,17 +218,15 @@ function App() {
             const lowerCase = "abcdefghijklmnopqrstuvwxyz";
             const numbers = "0123456789";
             const symbols = "!@#$%^&*()_+~`|}{[]:;?><,./-=";
-            let output = ""; //create an empty string
+            let output = "";
 
             for (let i = 0; i < length; i++) {
-              //loop through the length of the password
               if (checkbox.includes("upperCase")) {
-                //if the checkbox includes uppercase
                 output +=
-                  upperCase[Math.floor(Math.random() * upperCase.length)]; //add a random uppercase letter to the output string
+                  upperCase[Math.floor(Math.random() * upperCase.length)];
               }
               if (checkbox.includes("lowerCase")) {
-                output += lowerCase[Math.floor(Math.random() * lowerCase.length)]; //
+                output += lowerCase[Math.floor(Math.random() * lowerCase.length)];
               }
               if (checkbox.includes("numbers")) {
                 output += numbers[Math.floor(Math.random() * numbers.length)];
@@ -218,8 +234,8 @@ function App() {
               if (checkbox.includes("symbols")) {
                 output += symbols[Math.floor(Math.random() * symbols.length)];
               }
-              let pw = output.slice(0, length); //slice the output string to the length of the password
-              setPassword(pw); //set the password state to the output string
+              let pw = output.slice(0, length);
+              setPassword(pw);
             }
           }}
         >

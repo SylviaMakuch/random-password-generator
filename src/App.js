@@ -3,6 +3,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { radioOptions } from "./config";
 import navigator from "react";
+import Slider from "@mui/material/Slider";
 
 const Background = styled.div`
   background: rgb(22 188 191);
@@ -81,11 +82,6 @@ const CopyButton = styled.button`
   }
 `;
 
-const CheckBoxContainer = styled.div`
-  margin: 2rem;
-  width: 75%;
-`;
-
 const CheckBoxInputContainer = styled.div`
   display: grid;
   grid-template-columns: 85% 15%;
@@ -95,7 +91,14 @@ const CheckBoxInputContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
-  width: 90% ;
+  width: 98%;
+`;
+
+const PwLengthContainer = styled.div`
+  display: grid;
+  grid-template-columns: 90% 6%;
+  grid-template-rows: 1fr;
+  width: 98%;
 `;
 
 const Button = styled.button`
@@ -166,52 +169,63 @@ function App() {
     <Background>
       <H1> Random Password Generator</H1>
       <Card className="card">
-        <CheckBoxContainer className="checkbox-container" style={{ width: "90%" }}>
+
+        <CheckBoxInputContainer className="checkbox-input-container">
+          <Input type="text" placeholder="Your Password" value={password} />
+          <CopyButton onClick={() => copyToClipboard(password)}
+          >Copy</CopyButton>
+        </CheckBoxInputContainer>
+      <PwLengthContainer>
+          <Label for="length">Password Length</Label>
+          <input
+            type="number"
+            id="length"
+            name="length"
+            min="6"
+            max="25"
+            onChange={(e) => {
+              setLength(e.target.value);
+            }}
+            value={length}
+          />
+          </PwLengthContainer>
+          <Slider
+            valueLabelDisplay="auto"
+            aria-label="pretto slider"
+            defaultValue={6}
+            min={6}
+            max={25}
+            onChange={(e, value) => {
+              setLength(value);
+            }}
+
+          />
+        {radioOptions.map((option, index) => (
           <CheckBoxInputContainer className="checkbox-input-container">
-            <Input type="text" placeholder="Your Password" value={password} />
-            <CopyButton onClick={() => copyToClipboard(password)}
-            >Copy</CopyButton>
-          </CheckBoxInputContainer>
-          <CheckBoxInputContainer>
-            <Label for="length">Password Length</Label>
+            <Label for={option.id}>{option.label}</Label>
             <input
-              type="number"
-              id="length"
-              name="length"
-              min="6"
-              max="25"
-              onChange={(e) => {
-                setLength(e.target.value);
+              style={{ height: "1.4rem" }}
+              type={option.type}
+              id={option.id}
+              name={option.value}
+              value={option.value}
+              min={option.min}
+              max={option.max}
+              key={index}
+              onChange={() => {
+                const newCheckbox = [...checkbox]; //copy the array
+                if (newCheckbox.includes(option.value)) {
+                  const index = newCheckbox.indexOf(option.value); //get the index of the value
+                  newCheckbox.splice(index, 1); //remove the value from the array
+                }
+                if (!newCheckbox.includes(option.value)) {
+                  newCheckbox.push(option.value); //add the value to the array
+                }
+                setCheckbox(newCheckbox);
               }}
             />
           </CheckBoxInputContainer>
-          {radioOptions.map((option, index) => (
-            <CheckBoxInputContainer className="checkbox-input-container">
-              <Label for={option.id}>{option.label}</Label>
-              <input
-                style={{ height: "1.4rem" }}
-                type={option.type}
-                id={option.id}
-                name={option.value}
-                value={option.value}
-                min={option.min}
-                max={option.max}
-                key={index}
-                onChange={() => {
-                  const newCheckbox = [...checkbox]; //copy the array
-                  if (newCheckbox.includes(option.value)) {
-                    const index = newCheckbox.indexOf(option.value); //get the index of the value
-                    newCheckbox.splice(index, 1); //remove the value from the array
-                  }
-                  if (!newCheckbox.includes(option.value)) {
-                    newCheckbox.push(option.value); //add the value to the array
-                  }
-                  setCheckbox(newCheckbox);
-                }}
-              />
-            </CheckBoxInputContainer>
-          ))}
-        </CheckBoxContainer>
+        ))}
         <Button
           onClick={() => {
             const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

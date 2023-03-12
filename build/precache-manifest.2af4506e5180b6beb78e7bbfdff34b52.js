@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/SylviaMakuch/random-password-generator/static/js/runtime~main.21edce6e.js"
   },
   {
-    "revision": "bb64763c8edb7f1bffa174522d3b75af",
+    "revision": "98f6138dcd3d9687ac467e8bf4957031",
     "url": "/SylviaMakuch/random-password-generator/index.html"
   }
 ];

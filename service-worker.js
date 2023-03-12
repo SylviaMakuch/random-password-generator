@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/SylviaMakuch/random-password-generator/precache-manifest.ccaf2ad7c07497ca5416dde0d748b24e.js"
+  "/SylviaMakuch/random-password-generator/precache-manifest.b2dec437af6c33ed348d63220eab4a74.js"
 );
 
 workbox.clientsClaim();

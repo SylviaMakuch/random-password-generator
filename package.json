@@ -1,7 +1,7 @@
 { "name": "random-password-generator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/SylviaMakuch/random-password-generator/",
+  "homepage": "https://sylviamakuch.github.io/random-password-generator/",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/SylviaMakuch/random-password-generator/precache-manifest.f0efd621093ab11aff50ea54a0b5de95.js"
+  "/random-password-generator/precache-manifest.35b213825a9bde445e022bdef2915f6b.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/SylviaMakuch/random-password-generator/index.html", {
+workbox.routing.registerNavigationRoute("/random-password-generator/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
